@@ -3,7 +3,7 @@ package com.Module_1;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Big_Numbers {
+public class BigNumbers {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int firstLenght = in.nextInt();
