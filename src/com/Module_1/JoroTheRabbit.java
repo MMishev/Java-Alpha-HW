@@ -1,14 +1,11 @@
 package com.Module_1;
-
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class JoroTheRabbit {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String[] input = in.nextLine().split(", ");
-        int counter =1;
+        int counter = 1;
         int temp = 1;
         int beforeJump = 0;
         int afterJump = 0;
@@ -24,30 +21,25 @@ public class JoroTheRabbit {
                 } else {
                     afterJump = inputData.get(j + i);
                 }
-
                 if (beforeJump < afterJump) {
                     int jump = i + j;
                     while (beforeJump < afterJump) {
-                        jump+=i;
+                        jump += i;
                         temp++;
                         beforeJump = afterJump;
-                        if ( jump >=inputData.size()){
-                            jump = jump%inputData.size();
-                            afterJump= inputData.get(jump);
-                        }
-                        else {
-                            afterJump =inputData.get(jump);
+                        if (jump >= inputData.size()) {
+                            jump = jump % inputData.size();
+                            afterJump = inputData.get(jump);
+                        } else {
+                            afterJump = inputData.get(jump);
                         }
                         if (temp > counter) {
                             counter = temp;
                         }
                     }
                     temp = 1;
-
                 }
             }
-
-
         }
         System.out.println(counter);
     }

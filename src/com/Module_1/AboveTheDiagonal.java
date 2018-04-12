@@ -1,7 +1,6 @@
-package com.company;
+package com.Module_1;
 
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class AboveTheDiagonal {
