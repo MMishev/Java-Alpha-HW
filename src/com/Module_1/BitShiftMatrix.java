@@ -1,5 +1,6 @@
 package com.Module_1;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,33 +11,49 @@ public class BitShiftMatrix {
         int cols = in.nextInt();
         int coef = Math.max(rows,cols);
         int moves = in.nextInt();
-        int rowIndex = 0;
-        int colIndex = 0;
-        int[][] matrix = new  int[rows][cols];
-        in.nextLine();
-        
-        String[] input = in.nextLine().split(" ");
-
-        ArrayList<Integer> values = new ArrayList<Integer>();
-
-        for(String x : input){
-            values.add(Integer.parseInt(x));
-        }
+        int startRow = rows-1;
+        int startCol = 0;
+        boolean[][] matrix = new  boolean[rows][cols];
 
         for (int i = 0; i < moves; i++) {
-            rowIndex = values.get(i)/coef;
-            colIndex = values.get(i)%coef;
+            int code = in.nextInt();
+            int nextRow = code / coef;
+            int nextCol = code % coef;
+            int colDir = startCol<nextCol
+                    ? 1
+                    : -1;
 
-
-        }
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                matrix[i][j] = 1<< ((rows-1)-i+j);
-                System.out.print(matrix[i][j]+",");
+            while(startCol!=nextCol){
+                matrix[startRow][startCol] = true;
+                startCol+=colDir;
             }
-            System.out.println();
+
+            int rowDir = startRow<nextRow
+                    ? 1
+                    : -1;
+            while (startRow!=nextRow){
+                matrix[startRow][startCol] = true;
+                startRow+=rowDir;
+            }
+            matrix[startRow][startCol] = true;
         }
 
+        BigInteger result = BigInteger.ZERO;
 
+        for (int r = 0; r < rows ; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (matrix[r][c]){
+                    result = result.add(getValue(r,c,rows));
+                }
+            }
+        }
+        System.out.println(result);
+
+
+    }
+
+    private static BigInteger getValue(int r, int c,int rows) {
+        int power = rows-1-r+c;
+        return BigInteger.valueOf(2).pow(power);
     }
 }
